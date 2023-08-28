@@ -37,6 +37,52 @@ def jobs():
     conn.close()
     return render_template('jobs.html', Jobs=Jobs)
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        emailaddress = request.form['emailaddress']
+        firstname = request.form['firstname']
+        lastname = request.form['lastname']
+
+        if not username:
+            flash('Username is required!')
+        elif not emailaddress:
+            flash('Email Address is required!')
+        elif not password:
+            flash('Password is required!')
+        elif not firstname:
+            flash('First Name is required!')
+        elif not lastname:
+            flash('Last Name is required!')
+        else:
+            conn = database_connection()
+            conn.execute('INSERT INTO Users (username, password, emailaddress, firstname, lastname) VALUES (?, ?, ?, ?, ?)',
+                         (username, password, emailaddress, firstname, lastname))
+            conn.commit()
+            conn.close()
+            return redirect(url_for('index'))
+
+    return render_template('register.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        emailaddress = request.form['emailaddress']
+        password = request.form['password']
+
+        conn = database_connection()
+        User = conn.execute('SELECT * FROM Users WHERE emailaddress = ?', (emailaddress,)).fetchone()
+        conn.close()
+        return redirect(url_for('profile'))
+    
+    return render_template('login.html')
+        
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 @app.route('/<int:job_id>')
 def job(job_id):
     job = get_job(job_id)

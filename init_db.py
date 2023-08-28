@@ -19,5 +19,9 @@ cur.execute("INSERT INTO Jobs (title, description, datecreated, deadline, status
             ('Create QA Plan for QWERTY Company', 'QWERTY have requested a QA plan for their new release', '2023‐08‐20', '2023‐09‐20', 'Backlog', 700.99)
             )
 
+cur.execute("INSERT INTO Users (username, password, emailaddress, firstname, lastname) VALUES (?, ?, ?, ?, ?)",
+            ('qa', 'password', 'qa@freelanceflow.local', 'Luke', 'Morton')
+            )
+
 connection.commit()
 connection.close()
