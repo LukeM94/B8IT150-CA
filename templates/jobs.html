@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Here's all your jobs {% endblock %}
+{% block jumbotron_title %} Here's all your jobs {% endblock %}
+{% block content %}
+    <div class="container">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Job in Jobs %}
+                    <tr>
+                        <td><a href="{{ url_for('job', job_id=Job['jobid']) }}">{{ Job['title'] }}</a></td>
+                        <td>{{ Job['description'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

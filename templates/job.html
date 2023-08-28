@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ job['title'] }} {% endblock %}
+{% block jumbotron_title %} {{ job['title'] }} {% endblock %}
+{% block content %}
+    <span class="badge badge-primary">{{ job['datecreated'] }}</span>
+    <p>Job ID: {{ job['jobid'] }}</p>
+    <p>Description: {{ job['description'] }}</p>
+    <p>Deadline: {{ job['deadline'] }}</p>
+    <p>Status: {{ job['status'] }}</p>
+    <p>Quotation: €{{ job['quotation'] }}</p>
+{% endblock %}

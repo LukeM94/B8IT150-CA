@@ -1,5 +1,30 @@
 {% extends 'base.html' %}
 
+{% block title %} FreelanceFlow - The job tracking system for Freelancers! {% endblock %}
+{% block jumbotron_title %} FreelanceFlow - The job tracking system for Freelancers! {% endblock %}
 {% block content %}
-    <h1>{% block title %} FreelanceFlow - The job tracking system for Freelancers! {% endblock %}</h1>
+    <div class="heroImage">
+    </div>
+    <div class="container text-center mt-5">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="testimonial">
+              <img src="../static/images/customerOne.jpg" class="rounded-circle" alt="Testimonial 1">
+              <p>Increased my productivity 10x!</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial">
+              <img src="../static/images/customerTwo.jpg" class="rounded-circle" alt="Testimonial 2">
+              <p>An incredibly reliable - highly recommended for any freelancers...</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial">
+              <img src="../static/images/customerThree.jpg" class="rounded-circle" alt="Testimonial 3">
+              <p>Using FreelanceFlow has made managing multiple jobs so much easier...</p>
+            </div>
+          </div>
+        </div>
+      </div>    
 {% endblock %}
