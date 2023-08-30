@@ -66,7 +66,7 @@ def calendar():
 @login_required
 def jobs():
     conn = database_connection()
-    Jobs = conn.execute('SELECT * FROM Jobs').fetchall()
+    Jobs = conn.execute('SELECT * FROM Jobs WHERE createdby = ?', (current_user.id,)).fetchall()
     conn.close()
     return render_template('jobs.html', Jobs=Jobs)
 
@@ -154,8 +154,8 @@ def createjob():
             flash('Description is required!')
         else:
             conn = database_connection()
-            conn.execute('INSERT INTO Jobs (title, description, datecreated, deadline, status, quotation) VALUES (?, ?, ?, ?, ?, ?)',
-                         (title, description, datecreated, deadline, status, quotation))
+            conn.execute('INSERT INTO Jobs (title, description, datecreated, deadline, status, quotation, createdby) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                         (title, description, datecreated, deadline, status, quotation, current_user.id))
             conn.commit()
             conn.close()
             return redirect(url_for('index'))
