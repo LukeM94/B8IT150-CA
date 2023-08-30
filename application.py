@@ -95,7 +95,7 @@ def register():
                          (username, password, emailaddress, firstname, lastname))
             conn.commit()
             conn.close()
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
 
     return render_template('register.html')
 
@@ -158,7 +158,7 @@ def createjob():
                          (title, description, datecreated, deadline, status, quotation, current_user.id))
             conn.commit()
             conn.close()
-            return redirect(url_for('index'))
+            return redirect(url_for('jobs'))
 
     return render_template('createjob.html')
 
@@ -184,7 +184,7 @@ def modifyjob(job_id):
             conn.execute('UPDATE Jobs SET title = ?, description = ?, datecreated = ?, deadline = ?, status = ?, quotation = ? WHERE jobid = ?', (title, description, datecreated, deadline, status, quotation))
             conn.commit()
             conn.close()
-            return redirect(url_for('index'))
+            return redirect(url_for('jobs'))
 
     return render_template('modifyjob.html', job=job)
 

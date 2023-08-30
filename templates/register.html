@@ -3,37 +3,32 @@
 {% block title %} Register {% endblock %}
 {% block jumbotron_title %} Register {% endblock %}
 {% block content %}
-<div class="column is-4 is-offset-4">
-    <div class="box">
-        <form method="POST" action="/register">
-            <div class="field">
-                <div class="control">
-                    <input type="text" name="username" placeholder="Username" autofocus="">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <form method="POST" action="/register">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Username" autofocus="">
                 </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <input type="password" name="password" placeholder="Password">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password">
                 </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <input type="email" name="emailaddress" placeholder="Email Address" autofocus="">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" name="emailaddress" placeholder="Email Address" autofocus="">
                 </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <input type="text" name="firstname" placeholder="First Name" autofocus="">
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" name="firstname" placeholder="First Name" autofocus="">
                 </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <input type="text" name="lastname" placeholder="Last Name" autofocus="">
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" name="lastname" placeholder="Last Name" autofocus="">
                 </div>
-            </div>
 
-            <button class="button is-block is-info is-large is-fullwidth">Register</button>
-        </form>
+                <button class="btn btn-primary">Register</button>
+            </form>
+        </div>
     </div>
-</div>
 {% endblock %}
