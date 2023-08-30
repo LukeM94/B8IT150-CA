@@ -7,12 +7,14 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <span class="badge badge-primary">{{ job['datecreated'] }}</span>
-                    <p class="card-text">Job ID: {{ job['jobid'] }}</p>
+                    <p class="badge badge-primary">Job ID: {{ job['jobid'] }}</p>
+                    <p class="card-text">Date Created: {{ job['datecreated'] }}</p>
                     <p class="card-text">Description: {{ job['description'] }}</p>
                     <p class="card-text">Deadline: {{ job['deadline'] }}</p>
                     <p class="card-text">Status: {{ job['status'] }}</p>
                     <p class="card-text">Quotation: €{{ job['quotation'] }}</p>
+                    <a href="{{ url_for('modifyjob', job_id=job['jobid']) }}" class="btn btn-primary">Modify Job</a>
+                    <a href="#" class="btn btn-danger">Delete Job</a>
                 </div>
             </div>
         </div>

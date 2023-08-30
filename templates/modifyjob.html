@@ -5,37 +5,37 @@
 {% block content %}
     <div class="row justify-content-center">
         <div class="col-md-5">
-            <form method="post">
+            <form method="POST">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" name="title" placeholder="Job title" value="{{ request.form['title'] or job['title'] }}">
                 </div>
-
                 <div class="form-group">
                     <label for="content">Description</label>
                     <textarea class="form-control" name="description" placeholder="Enter details about the job here..." rows="6">{{ request.form['description'] or job['description'] }}</textarea>
                 </div>
-
                 <div class="form-group">
                     <label for="datecreated">Date Created</label>
-                    <input type="text" class="form-control" name="datecreated" placeholder="Date Created YYYY/MM/DD" value="{{ request.form['datecreated'] or job['datecreated'] }}">
+                    <input type="date" class="form-control" name="datecreated" value="{{ request.form['datecreated'] or job['datecreated'] }}">
                 </div>
-
                 <div class="form-group">
                     <label for="deadline">Deadline</label>
-                    <input type="text" class="form-control" name="deadline" placeholder="Deadline YYYY/MM/DD" value="{{ request.form['deadline'] or job['deadline'] }}">
+                    <input type="date" class="form-control" name="deadline" value="{{ request.form['deadline'] or job['deadline'] }}">
                 </div>
-
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <input type="text" class="form-control" name="status" placeholder="Status" value="{{ request.form['status'] or job['status'] }}">
+                    <select class="form-control" name="status">
+                        <option value="Open" {% if job['status'] == 'Open' %}selected{% endif %}>Open</option>
+                        <option value="Backlog" {% if job['status'] == 'Backlog' %}selected{% endif %}>Backlog</option>
+                        <option value="Cancelled" {% if job['status'] == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                        <option value="Blocked" {% if job['status'] == 'Blocked' %}selected{% endif %}>Blocked</option>
+                        <option value="Complete" {% if job['status'] == 'Complete' %}selected{% endif %}>Complete</option>
+                    </select>
                 </div>
-
                 <div class="form-group">
                     <label for="status">Quotation</label>
                     <input type="text" class="form-control" name="quotation" aria-label="Amount (to the nearest Euro)" value="{{ request.form['quotation'] or job['quotation'] }}">
                 </div>
-
                 <button type="submit" class="btn btn-primary">Submit Changes</button>
             </form>
         </div>

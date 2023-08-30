@@ -182,17 +182,13 @@ def modifyjob(job_id):
         deadline = request.form['deadline']
         status = request.form['status']
         quotation = request.form['quotation']
+        createdby = current_user.id
 
-        if not title:
-            flash('Title is required!')
-        elif not description:
-            flash('Description is required!')
-        else:
-            conn = database_connection()
-            conn.execute('UPDATE Jobs SET title = ?, description = ?, datecreated = ?, deadline = ?, status = ?, quotation = ? WHERE jobid = ?', (title, description, datecreated, deadline, status, quotation))
-            conn.commit()
-            conn.close()
-            return redirect(url_for('jobs'))
+        conn = database_connection()
+        conn.execute('UPDATE Jobs SET title = ?, description = ?, datecreated = ?, deadline = ?, status = ?, quotation = ?, createdby = ? WHERE jobid = ?', (title, description, datecreated, deadline, status, quotation, createdby, job_id))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('jobs'))
 
     return render_template('modifyjob.html', job=job)
 
@@ -201,7 +197,7 @@ def modifyjob(job_id):
 def admin():
     if current_user.accounttype == 'admin':
         all_users = get_all_users()
-        return render_template('admin.html', all_users=all_users)
+        return render_template('admin.html', all_users)
     else:
         return redirect(url_for('index'))
 
