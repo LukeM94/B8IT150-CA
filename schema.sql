@@ -9,6 +9,8 @@ CREATE TABLE Jobs (
     deadline TEXT NOT NULL,
     status TEXT NOT NULL,
     quotation REAL NOT NULL
+    createdby INTEGER,
+    FOREIGN KEY (createdby) REFERENCES Users(userid)
 );
 
 CREATE TABLE Users (

@@ -1,5 +1,6 @@
 import sqlite3
 from flask import Flask, render_template, request, url_for, flash, redirect, abort
+from flask_login import LoginManager, UserMixin, current_user, login_required, login_user, logout_user
 from werkzeug.exceptions import abort
 
 def database_connection():
@@ -16,7 +17,37 @@ def get_job(job_id):
     return job
 
 app = Flask(__name__)
-#app.config['SECRET_KEY'] = '1234567890'
+app.config['SECRET_KEY'] = '1234567890'
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+
+class User(UserMixin):
+    def __init__(self, id, emailaddress, password, firstname, lastname):
+        self.id = id
+        self.emailaddress = emailaddress
+        self.password = password
+        self.firstname = firstname
+        self.lastname = lastname
+        self.authenticated = False
+
+    def is_active(self):
+        return self.authenticated
+    def is_anonymous(self):
+        return False
+    def is_authenticated(self):
+        return self.authenticated
+    def get_id(self):
+        return self.id
+
+@login_manager.user_loader
+def load_user(user_id):
+    conn = database_connection()
+    user_data = conn.execute('SELECT * FROM Users WHERE userid = ?', (user_id,)).fetchone()
+    conn.close()
+    if user_data is None:
+        return None
+    user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'])
+    return user
 
 @app.route('/')
 def index():
@@ -27,10 +58,12 @@ def about():
     return render_template('about.html')
 
 @app.route('/calendar')
+@login_required
 def calendar():
     return render_template('calendar.html')
 
 @app.route('/jobs')
+@login_required
 def jobs():
     conn = database_connection()
     Jobs = conn.execute('SELECT * FROM Jobs').fetchall()
@@ -68,27 +101,44 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('profile'))
+
     if request.method == 'POST':
         emailaddress = request.form['emailaddress']
         password = request.form['password']
 
         conn = database_connection()
-        User = conn.execute('SELECT * FROM Users WHERE emailaddress = ?', (emailaddress,)).fetchone()
+        user_data = conn.execute('SELECT * FROM Users WHERE emailaddress = ?', (emailaddress,)).fetchone()
         conn.close()
-        return redirect(url_for('profile'))
-    
+
+        if user_data and user_data['password'] == password:
+            user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'])
+            user.authenticated = True
+            login_user(user)
+            return redirect(url_for('profile'))
+
     return render_template('login.html')
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
         
 @app.route('/profile')
+@login_required
 def profile():
-    return render_template('profile.html')
+    return render_template('profile.html', user=current_user)
 
 @app.route('/<int:job_id>')
+@login_required
 def job(job_id):
     job = get_job(job_id)
     return render_template('job.html', job=job)
 
 @app.route('/createjob/', methods=('GET', 'POST'))
+@login_required
 def createjob():
     if request.method == 'POST':
         title = request.form['title']
@@ -113,6 +163,7 @@ def createjob():
     return render_template('createjob.html')
 
 @app.route('/<int:job_id>/modifyjob/', methods=('GET', 'POST'))
+@login_required
 def modifyjob(job_id):
     job = get_job(job_id)
 
