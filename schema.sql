@@ -19,5 +19,6 @@ CREATE TABLE Users (
     password TEXT NOT NULL,
     emailaddress TEXT NOT NULL,
     firstname TEXT NOT NULL,
-    lastname TEXT NOT NULL
+    lastname TEXT NOT NULL,
+    accounttype TEXT NOT NULL DEFAULT 'user'
 );

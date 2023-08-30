@@ -14,13 +14,14 @@ def database_connection():
     return conn
 
 class User(UserMixin):
-    def __init__(self, id, emailaddress, password, firstname, lastname, username):
+    def __init__(self, id, emailaddress, password, firstname, lastname, username, accounttype):
         self.id = id
         self.emailaddress = emailaddress
         self.password = password
         self.firstname = firstname
         self.lastname = lastname
         self.username = username
+        self.accounttype = accounttype
         self.authenticated = False
 
     def is_active(self):
@@ -39,7 +40,7 @@ def load_user(user_id):
     conn.close()
     if user_data is None:
         return None
-    user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'], user_data['username'])
+    user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'], user_data['username'], user_data['accounttype'])
     return user
 
 def get_job(job_id):
@@ -49,6 +50,12 @@ def get_job(job_id):
     if job is None:
         abort(404)
     return job
+
+def get_all_users():
+    conn = database_connection()
+    all_users = conn.execute('SELECT * FROM Users').fetchall()
+    conn.close()
+    return all_users
 
 @app.route('/')
 def index():
@@ -114,7 +121,7 @@ def login():
         conn.close()
 
         if user_data and user_data['password'] == password:
-            user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'], user_data['username'])
+            user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'], user_data['username'], user_data['accounttype'])
             user.authenticated = True
             login_user(user)
             return redirect(url_for('profile'))
@@ -188,6 +195,15 @@ def modifyjob(job_id):
             return redirect(url_for('jobs'))
 
     return render_template('modifyjob.html', job=job)
+
+@app.route('/admin')
+@login_required
+def admin():
+    if current_user.accounttype == 'admin':
+        all_users = get_all_users()
+        return render_template('admin.html', all_users=all_users)
+    else:
+        return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='8080')
