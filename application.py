@@ -3,31 +3,24 @@ from flask import Flask, render_template, request, url_for, flash, redirect, abo
 from flask_login import LoginManager, UserMixin, current_user, login_required, login_user, logout_user
 from werkzeug.exceptions import abort
 
-def database_connection():
-    conn = sqlite3.connect('freelanceflow.db')
-    conn.row_factory = sqlite3.Row
-    return conn
-
-def get_job(job_id):
-    conn = database_connection()
-    job = conn.execute('SELECT * FROM Jobs WHERE jobid = ?', (job_id,)).fetchone()
-    conn.close()
-    if job is None:
-        abort(404)
-    return job
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890'
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
+def database_connection():
+    conn = sqlite3.connect('freelanceflow.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
 class User(UserMixin):
-    def __init__(self, id, emailaddress, password, firstname, lastname):
+    def __init__(self, id, emailaddress, password, firstname, lastname, username):
         self.id = id
         self.emailaddress = emailaddress
         self.password = password
         self.firstname = firstname
         self.lastname = lastname
+        self.username = username
         self.authenticated = False
 
     def is_active(self):
@@ -46,8 +39,16 @@ def load_user(user_id):
     conn.close()
     if user_data is None:
         return None
-    user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'])
+    user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'], user_data['username'])
     return user
+
+def get_job(job_id):
+    conn = database_connection()
+    job = conn.execute('SELECT * FROM Jobs WHERE jobid = ?', (job_id,)).fetchone()
+    conn.close()
+    if job is None:
+        abort(404)
+    return job
 
 @app.route('/')
 def index():
@@ -113,7 +114,7 @@ def login():
         conn.close()
 
         if user_data and user_data['password'] == password:
-            user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'])
+            user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'], user_data['username'])
             user.authenticated = True
             login_user(user)
             return redirect(url_for('profile'))

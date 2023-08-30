@@ -18,18 +18,18 @@
                 </div>
                 <div class="form-group">
                     <label for="datecreated">Date Created</label>
-                    <input type="text" class="form-control" name="datecreated"
-                            placeholder="Date Created YYYY/MM/DD" value="{{ request.form['datecreated'] }}">
+                    <input type="date" class="form-control" name="datecreated">
                 </div>
                 <div class="form-group">
                     <label for="deadline">Deadline</label>
-                    <input type="text" class="form-control" name="deadline"
-                            placeholder="Deadline YYYY/MM/DD" value="{{ request.form['deadline'] }}">
+                    <input type="date" class="form-control" name="deadline">
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <input type="text" class="form-control" name="status" placeholder="Status"
-                            value="{{ request.form['status'] }}">
+                    <select class="form-control" name="status">
+                        <option value="Open">Open</option>
+                        <option value="Backlog">Backlog</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="status">Quotation</label>
