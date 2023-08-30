@@ -68,7 +68,17 @@ def about():
 @app.route('/calendar')
 @login_required
 def calendar():
-    return render_template('calendar.html')
+    conn = database_connection()
+    Jobs = conn.execute('SELECT * FROM Jobs WHERE createdby = ?', (current_user.id,)).fetchall()
+    conn.close()
+
+    events = []
+    for job in Jobs:
+        events.append({
+            'title': job['title'],
+            'start': job['deadline']
+        })
+    return render_template('calendar.html', events=events)
 
 @app.route('/jobs')
 @login_required
