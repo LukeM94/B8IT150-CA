@@ -39,11 +39,14 @@
             </ul>
         </div>
     </nav>
-      <div class="content">
-        <div class="container mt-5">
+    <div class="content">
+      <div class="container mt-5">
           <div class="jumbotron text-center">
               <h1 class="display-4">{% block jumbotron_title %}{% endblock %}</h1>
           </div>
+          {% for message in get_flashed_messages() %}
+            <div class="text-center alert-error">{{ message }}</div>
+         {% endfor %}
       </div>
       {% block content %} {% endblock %}
     </div>

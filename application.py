@@ -86,7 +86,11 @@ def jobs():
     conn = database_connection()
     Jobs = conn.execute('SELECT * FROM Jobs WHERE createdby = ?', (current_user.id,)).fetchall()
     conn.close()
-    return render_template('jobs.html', Jobs=Jobs)
+    if not Jobs:
+        flash('Create your first job here!')
+        return redirect(url_for('createjob'))
+    else:
+        return render_template('jobs.html', Jobs=Jobs)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -97,16 +101,8 @@ def register():
         firstname = request.form['firstname']
         lastname = request.form['lastname']
 
-        if not username:
-            flash('Username is required!')
-        elif not emailaddress:
-            flash('Email Address is required!')
-        elif not password:
-            flash('Password is required!')
-        elif not firstname:
-            flash('First Name is required!')
-        elif not lastname:
-            flash('Last Name is required!')
+        if not username or not password or not emailaddress or not firstname or not lastname:
+            flash('All fields are required!')
         else:
             conn = database_connection()
             conn.execute('INSERT INTO Users (username, password, emailaddress, firstname, lastname) VALUES (?, ?, ?, ?, ?)',
@@ -135,6 +131,8 @@ def login():
             user.authenticated = True
             login_user(user)
             return redirect(url_for('profile'))
+        else:
+            flash('Invalid email address or password!')
 
     return render_template('login.html')
 
@@ -166,10 +164,8 @@ def createjob():
         status = request.form['status']
         quotation = request.form['quotation']
 
-        if not title:
-            flash('Title is required!')
-        elif not description:
-            flash('Description is required!')
+        if not title or not description:
+            flash('Title and Description are required!')
         else:
             conn = database_connection()
             conn.execute('INSERT INTO Jobs (title, description, datecreated, deadline, status, quotation, createdby) VALUES (?, ?, ?, ?, ?, ?, ?)',
@@ -201,6 +197,17 @@ def modifyjob(job_id):
         return redirect(url_for('jobs'))
 
     return render_template('modifyjob.html', job=job)
+
+@app.route('/<int:job_id>/deletejob/', methods=('GET', 'POST'))
+@login_required
+def deletejob(job_id):
+    job = get_job(job_id)
+    conn = database_connection()
+    conn.execute('DELETE FROM Jobs WHERE jobid = ?', (job_id,))
+    conn.commit()
+    conn.close()
+    flash('Job deleted!')
+    return redirect(url_for('jobs'))
 
 @app.route('/admin')
 @login_required

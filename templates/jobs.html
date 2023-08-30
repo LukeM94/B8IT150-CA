@@ -9,6 +9,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Description</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
                     <tr>
                         <td><a href="{{ url_for('job', job_id=Job['jobid']) }}">{{ Job['title'] }}</a></td>
                         <td>{{ Job['description'] }}</td>
+                        <td>{{ Job['status'] }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
