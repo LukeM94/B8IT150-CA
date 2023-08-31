@@ -2,11 +2,13 @@ import sqlite3
 from flask import Flask, render_template, request, url_for, flash, redirect, abort
 from flask_login import LoginManager, UserMixin, current_user, login_required, login_user, logout_user
 from werkzeug.exceptions import abort
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890'
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
+bcrypt = Bcrypt(app)
 
 def database_connection():
     conn = sqlite3.connect('freelanceflow.db')
@@ -104,9 +106,10 @@ def register():
         if not username or not password or not emailaddress or not firstname or not lastname:
             flash('All fields are required!')
         else:
+            pw_hash = bcrypt.generate_password_hash(password).decode('utf-8')
             conn = database_connection()
             conn.execute('INSERT INTO Users (username, password, emailaddress, firstname, lastname) VALUES (?, ?, ?, ?, ?)',
-                         (username, password, emailaddress, firstname, lastname))
+                         (username, pw_hash, emailaddress, firstname, lastname))
             conn.commit()
             conn.close()
             return redirect(url_for('login'))
@@ -126,7 +129,7 @@ def login():
         user_data = conn.execute('SELECT * FROM Users WHERE emailaddress = ?', (emailaddress,)).fetchone()
         conn.close()
 
-        if user_data and user_data['password'] == password:
+        if user_data and bcrypt.check_password_hash(user_data['password'], password):
             user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'], user_data['username'], user_data['accounttype'])
             user.authenticated = True
             login_user(user)
