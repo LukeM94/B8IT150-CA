@@ -3,18 +3,20 @@
 {% block title %} Login {% endblock %}
 {% block jumbotron_title %} Login {% endblock %}
 {% block content %}
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-            <form method="POST" action="/login">
-                <div class="form-outline mb-4">
-                    <input type="email" class="form-control" name="emailaddress" placeholder="Email Address" autofocus="" />
-                </div>
-                <div class="form-outline mb-4">
-                    <input type="password" class="form-control" name="password" placeholder="Password" />
-                </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <form method="POST" action="/login">
+                    <div class="form-outline mb-4">
+                        <input type="email" class="form-control" name="emailaddress" placeholder="Email Address" autofocus="" />
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="password" class="form-control" name="password" placeholder="Password" />
+                    </div>
 
-                <button class="btn btn-primary">Login</button>
-            </form>
-        </div> 
+                    <button class="btn btn-primary">Login</button>
+                </form>
+            </div> 
+        </div>
     </div>
 {% endblock %}

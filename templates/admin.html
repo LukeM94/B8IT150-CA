@@ -3,29 +3,31 @@
 {% block title %} Admin Area {% endblock %}
 {% block jumbotron_title %} Admin Area {% endblock %}
 {% block content %}
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h2>Users</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Username</th>
-                        <th>Email Address</th>
-                        <th>Account Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in all_users %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h2>Users</h2>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>{{ user['userid'] }}</td>
-                            <td>{{ user['username'] }}</td>
-                            <td>{{ user['emailaddress'] }}</td>
-                            <td>{{ user['accounttype'] }}</td>
+                            <th>User ID</th>
+                            <th>Username</th>
+                            <th>Email Address</th>
+                            <th>Account Type</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for user in all_users %}
+                            <tr>
+                                <td>{{ user['userid'] }}</td>
+                                <td>{{ user['username'] }}</td>
+                                <td>{{ user['emailaddress'] }}</td>
+                                <td>{{ user['accounttype'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}
