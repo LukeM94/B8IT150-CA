@@ -4,7 +4,7 @@ from flask_login import LoginManager, UserMixin, current_user, login_required, l
 from werkzeug.exceptions import abort
 from flask_bcrypt import Bcrypt
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = '1234567890'
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
