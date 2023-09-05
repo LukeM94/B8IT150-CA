@@ -1,8 +1,9 @@
 import sqlite3
-from flask import Flask, render_template, request, url_for, flash, redirect, abort
+from flask import Flask, render_template, request, url_for, flash, redirect, abort, make_response
 from flask_login import LoginManager, UserMixin, current_user, login_required, login_user, logout_user
 from werkzeug.exceptions import abort
 from flask_bcrypt import Bcrypt
+from reportlab.pdfgen import canvas
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = '1234567890'
@@ -52,6 +53,12 @@ def get_job(job_id):
     if job is None:
         abort(404)
     return job
+
+def get_all_jobs():
+    conn = database_connection()
+    all_jobs = conn.execute('SELECT * FROM Jobs WHERE createdby = ?', (current_user.id,)).fetchall()
+    conn.close()
+    return all_jobs
 
 def get_all_users():
     conn = database_connection()
@@ -220,6 +227,32 @@ def admin():
         return render_template('admin.html', all_users)
     else:
         return redirect(url_for('index'))
+
+@app.route('/generate_report')
+@login_required
+def generate_report():
+    pdf = canvas.Canvas("report.pdf", pagesize=(595.27, 841.89))
+    pdf.setTitle("FreelanceFlow Report")
+    pdf.setFont("Helvetica", 12)
+
+    pdf.drawString(100, 800, "Below is a list of all jobs:")
+
+    all_jobs = get_all_jobs()
+
+    line_height = 800
+
+    for job in all_jobs:
+        line_height = line_height - 20
+        pdf.drawString(100, line_height, job['title'])
+
+    pdf.showPage()
+    pdf.save()
+
+    response = make_response(open("report.pdf", 'rb').read())
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'inline; filename=report.pdf'
+
+    return response
 
 if __name__ == "__main__":
     #app.run(host='0.0.0.0', port='8080')
