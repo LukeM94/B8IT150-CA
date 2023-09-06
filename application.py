@@ -289,6 +289,7 @@ def generate_report():
     return response
 
 #This route is for the search page
+#Function gets all jobs from the database where the title or ID match the search term AND where the current user is the creator and displays them
 @app.route('/search', methods=['GET'])
 @login_required
 def search():
