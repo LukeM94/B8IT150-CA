@@ -1,3 +1,4 @@
+#Importing the required libraries
 import sqlite3
 from flask import Flask, render_template, request, url_for, flash, redirect, abort, make_response
 from flask_login import LoginManager, UserMixin, current_user, login_required, login_user, logout_user
@@ -5,17 +6,20 @@ from werkzeug.exceptions import abort
 from flask_bcrypt import Bcrypt
 from reportlab.pdfgen import canvas
 
+#Creating the Flask application
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = '1234567890'
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 bcrypt = Bcrypt(app)
 
+#Creating the database connection to freelanceflow.db
 def database_connection():
     conn = sqlite3.connect('freelanceflow.db')
     conn.row_factory = sqlite3.Row
     return conn
 
+#Creating the User class used by Flask-Login
 class User(UserMixin):
     def __init__(self, id, emailaddress, password, firstname, lastname, username, accounttype):
         self.id = id
@@ -36,6 +40,7 @@ class User(UserMixin):
     def get_id(self):
         return self.id
 
+#Creating the load_user function used by Flask-Login
 @login_manager.user_loader
 def load_user(user_id):
     conn = database_connection()
@@ -46,6 +51,7 @@ def load_user(user_id):
     user = User(user_data['userid'], user_data['emailaddress'], user_data['password'], user_data['firstname'], user_data['lastname'], user_data['username'], user_data['accounttype'])
     return user
 
+#Function to get one job from the database based on the Job ID
 def get_job(job_id):
     conn = database_connection()
     job = conn.execute('SELECT * FROM Jobs WHERE jobid = ?', (job_id,)).fetchone()
@@ -54,26 +60,33 @@ def get_job(job_id):
         abort(404)
     return job
 
+#Function to get all jobs from the database where the current user is the creator
 def get_all_jobs():
     conn = database_connection()
     all_jobs = conn.execute('SELECT * FROM Jobs WHERE createdby = ?', (current_user.id,)).fetchall()
     conn.close()
     return all_jobs
 
+#Function to get all users from the database
 def get_all_users():
     conn = database_connection()
     all_users = conn.execute('SELECT * FROM Users').fetchall()
     conn.close()
     return all_users
 
+#Creating the routes for the application
+#This route is for the homepage
 @app.route('/')
 def index():
     return render_template('index.html')
 
+#This route is for the about page
 @app.route('/about')
 def about():
     return render_template('about.html')
 
+#This route is for the calendar page
+#Function gets all jobs from the database where the current user is the creator and displays them in the calendar
 @app.route('/calendar')
 @login_required
 def calendar():
@@ -89,6 +102,8 @@ def calendar():
         })
     return render_template('calendar.html', events=events)
 
+#This route is for the jobs page
+#Function gets all jobs from the database where the current user is the creator. If there are no jobs, the user is redirected to the createjob page
 @app.route('/jobs')
 @login_required
 def jobs():
@@ -101,6 +116,8 @@ def jobs():
     else:
         return render_template('jobs.html', Jobs=Jobs)
 
+#This route is for the register page
+#Function checks if all fields are filled in and then inserts the data into the database
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -123,6 +140,8 @@ def register():
 
     return render_template('register.html')
 
+#This route is for the login page
+#Function checks if the email address and password are correct and then logs the user in
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -146,24 +165,30 @@ def login():
 
     return render_template('login.html')
 
+#This route is for the logout page
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
-        
+
+#This route is for the profile page   
 @app.route('/profile')
 @login_required
 def profile():
     return render_template('profile.html', user=current_user)
 
+#This route is for the job page
+#Function gets the job from the database based on the Job ID and displays it
 @app.route('/<int:job_id>')
 @login_required
 def job(job_id):
     job = get_job(job_id)
     return render_template('job.html', job=job)
 
-@app.route('/createjob/', methods=('GET', 'POST'))
+#This route is for the createjob page
+#Function checks if all fields are filled in and then inserts the data into the database
+@app.route('/createjob', methods=('GET', 'POST'))
 @login_required
 def createjob():
     if request.method == 'POST':
@@ -186,7 +211,10 @@ def createjob():
 
     return render_template('createjob.html')
 
-@app.route('/<int:job_id>/modifyjob/', methods=('GET', 'POST'))
+#This route is for the modifyjob page
+#Function gets the job from the database based on the Job ID and displays it
+#Function also checks if all fields are filled in and then updates the data in the database
+@app.route('/<int:job_id>/modifyjob', methods=('GET', 'POST'))
 @login_required
 def modifyjob(job_id):
     job = get_job(job_id)
@@ -208,7 +236,9 @@ def modifyjob(job_id):
 
     return render_template('modifyjob.html', job=job)
 
-@app.route('/<int:job_id>/deletejob/', methods=('GET', 'POST'))
+#This route is to delete a job
+#Function deletes the job from the database based on the Job ID
+@app.route('/<int:job_id>/deletejob', methods=('GET', 'POST'))
 @login_required
 def deletejob(job_id):
     job = get_job(job_id)
@@ -219,6 +249,8 @@ def deletejob(job_id):
     flash('Job deleted!')
     return redirect(url_for('jobs'))
 
+#This route is for the admin page
+#Function checks the current user is an admin and gets all users from the database and displays them
 @app.route('/admin')
 @login_required
 def admin():
@@ -228,6 +260,8 @@ def admin():
     else:
         return redirect(url_for('index'))
 
+#This route is to generate a report
+#Function generates a PDF report with all jobs from the database where the current user is the creator
 @app.route('/generate_report')
 @login_required
 def generate_report():
@@ -254,6 +288,7 @@ def generate_report():
 
     return response
 
+#This block of code runs the application
 if __name__ == '__main__':
     #app.run(host='0.0.0.0', port='8080')
     app.run(port='8000')

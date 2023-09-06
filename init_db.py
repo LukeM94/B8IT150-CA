@@ -1,10 +1,14 @@
+#Importing the required libraries
 import sqlite3
 
+#Creating the database connection to freelanceflow.db
 connection = sqlite3.connect('freelanceflow.db')
 
+#Creating the database schema
 with open('schema.sql') as f:
     connection.executescript(f.read())
 
+#Seeding the database with some data for testing
 cur = connection.cursor()
 
 cur.execute('INSERT INTO Jobs (title, description, datecreated, deadline, status, quotation, createdby) VALUES (?, ?, ?, ?, ?, ?, ?)',
@@ -31,5 +35,6 @@ cur.execute('INSERT INTO Users (username, password, emailaddress, firstname, las
             ('quality', 'password', 'qa@luke.local', 'L', 'M')
             )
 
+#Committing the changes and closing the connection
 connection.commit()
 connection.close()
