@@ -17,7 +17,7 @@
                     <div class="alert alert-success" role="alert">
                         <p class="lead">Search results for <strong>{{ search_term }}</strong>:</p>
                     </div>
-                    <table class="table table-bordered table-hover">
+                    <table id="job_table" class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>Title</th>
@@ -35,6 +35,13 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            $('#job_table').DataTable( {
+                                "searching": false
+                            } );
+                        });
+                    </script>
                 {% endif %}
             </div> 
         </div>
