@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} Search {% endblock %}
+{% block jumbotron_title %} Search {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <form method="GET" action="/search">
+                    <div class="form-group">
+                        <label class="form-label" for="search_term">Enter a job ID or title to search for:</label>
+                        <input type="text" class="form-control rounded" placeholder="Search Query" name="search_term" autofocus="">
+                    </div>
+                    <button class="btn btn-primary">Search</button>
+                </form>
+                {% if Jobs %}
+                    <div class="alert alert-success" role="alert">
+                        <p class="lead">Search results for <strong>{{ search_term }}</strong>:</p>
+                    </div>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for Job in Jobs %}
+                                <tr>
+                                    <td><a href="{{ url_for('job', job_id=Job['jobid']) }}">{{ Job['title'] }}</a></td>
+                                    <td>{{ Job['description'] }}</td>
+                                    <td>{{ Job['status'] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div> 
+        </div>
+    </div>
+{% endblock %}

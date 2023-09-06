@@ -52,3 +52,7 @@ h1 {
   object-fit: cover;
   border-radius: 50%;
 }
+
+.alert {
+  margin-top: 20px;
+}

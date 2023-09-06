@@ -288,6 +288,20 @@ def generate_report():
 
     return response
 
+#This route is for the search page
+@app.route('/search', methods=['GET'])
+@login_required
+def search():
+    search_term = request.args.get('search_term')
+
+    if search_term is None:
+        return render_template('search.html')
+    else:
+        conn = database_connection()
+        Jobs = conn.execute('SELECT * FROM Jobs WHERE (title LIKE ? OR jobid LIKE ?) AND createdby = ?', ('%' + search_term + '%', '%' + search_term + '%', current_user.id)).fetchall()
+        conn.close()
+        return render_template('search.html', Jobs=Jobs, search_term=search_term)
+
 #This block of code runs the application
 if __name__ == '__main__':
     #app.run(host='0.0.0.0', port='8080')
