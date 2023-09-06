@@ -8,7 +8,7 @@ from reportlab.pdfgen import canvas
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = '1234567890'
 login_manager = LoginManager(app)
-login_manager.login_view = "login"
+login_manager.login_view = 'login'
 bcrypt = Bcrypt(app)
 
 def database_connection():
@@ -146,7 +146,7 @@ def login():
 
     return render_template('login.html')
 
-@app.route("/logout")
+@app.route('/logout')
 @login_required
 def logout():
     logout_user()
@@ -231,11 +231,11 @@ def admin():
 @app.route('/generate_report')
 @login_required
 def generate_report():
-    pdf = canvas.Canvas("report.pdf", pagesize=(595.27, 841.89))
-    pdf.setTitle("FreelanceFlow Report")
-    pdf.setFont("Helvetica", 12)
+    pdf = canvas.Canvas('report.pdf', pagesize=(595.27, 841.89))
+    pdf.setTitle('FreelanceFlow Report')
+    pdf.setFont('Helvetica', 12)
 
-    pdf.drawString(100, 800, "Below is a list of all jobs:")
+    pdf.drawString(100, 800, 'Below is a list of all jobs:')
 
     all_jobs = get_all_jobs()
 
@@ -248,12 +248,12 @@ def generate_report():
     pdf.showPage()
     pdf.save()
 
-    response = make_response(open("report.pdf", 'rb').read())
+    response = make_response(open('report.pdf', 'rb').read())
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'inline; filename=report.pdf'
 
     return response
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     #app.run(host='0.0.0.0', port='8080')
     app.run(port='8000')
