@@ -6,7 +6,7 @@ from werkzeug.exceptions import abort
 from flask_bcrypt import Bcrypt
 from reportlab.pdfgen import canvas
 
-#Creating the Flask application
+#Creating the Flask application. If the system was being deployed for real customers I'd make the secret key more secure
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = '1234567890'
 login_manager = LoginManager(app)
@@ -103,7 +103,7 @@ def calendar():
     return render_template('calendar.html', events=events)
 
 #This route is for the jobs page
-#Function gets all jobs from the database where the current user is the creator. If there are no jobs, the user is redirected to the createjob page
+#Function gets all jobs from the database where the current user is the creator. If there are no jobs, the user is redirected to the createjob page with a message to create their first job
 @app.route('/jobs')
 @login_required
 def jobs():
@@ -141,7 +141,7 @@ def register():
     return render_template('register.html')
 
 #This route is for the login page
-#Function checks if the email address and password are correct and then logs the user in
+#Function checks if the email address and password are correct and then logs the user in. If the email address or password are incorrect a message is displayed stating the email address or password is invalid
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -165,14 +165,14 @@ def login():
 
     return render_template('login.html')
 
-#This route is for the logout page
+#This route is for the logout page. The function logs the user out and redirects them to the homepage
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
-#This route is for the profile page   
+#This route is for the profile page
 @app.route('/profile')
 @login_required
 def profile():
@@ -305,5 +305,4 @@ def search():
 
 #This block of code runs the application
 if __name__ == '__main__':
-    #app.run(host='0.0.0.0', port='8080')
     app.run(port='8000')

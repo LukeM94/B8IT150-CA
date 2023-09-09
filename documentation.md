@@ -38,7 +38,7 @@ I also made extensive use of Bootstrap for the front end. Bootstrap is an extrem
 
 The back end uses Flask which is a Python web framework. Flask uses routes to create the URL endpoints and handles the requests for those endpoints. I chose to use Flask as I've worked with C# and ASP.NET in a previous module and wanted to learn some new skills.
 
-The application was deployed to Azure App Service. When configuring Azure App Service, I took advantage of the code being stored in GitHub to add a GitHub Action that would deploy the latest version of my project was changes were pushed to the repo.
+The system was deployed to Azure App Service. When configuring Azure App Service, I took advantage of the code being stored in GitHub to add a GitHub Action that would deploy the latest version of my project was changes were pushed to the repo.
 
 ## Testing
 
@@ -71,6 +71,22 @@ The below test cases were created to ensure the system meets the requirements me
 ## Conclusion
 If I had more time to spend on the project there are a number of features I'd like to implement. One of these would be a payment function where customers of freelancers could pay their invoices. A payment system could be built from scratch however there are many considerations, especially around security. A more straightforward solution if I was to develop this would be to integrate a third-party service like Stripe or PayPal.
 
-Another learning experience was using Overleaf to write the documentation in LATEX. I hadn't used LATEX before and found that while it's an incredibly powerful tool, it's also complex and I did struggle with things like table formatting. I decided to switch to Markdown for the documentation. The added bonus of using Markdown was the ability to work on my docs directly in VS Code where I was already writing code.
+I began using Overleaf to write the documentation in LATEX. I hadn't used LATEX before and found that while it's an incredibly powerful tool, it's also complex and I did struggle with things like table formatting. I decided to switch to Markdown for the documentation. The added bonus of using Markdown was the ability to work on my docs directly in VS Code where I was already writing code.
+
+When deploying the application, I initially deployed to a Ubuntu VM running on Azure. I spent some time trying to remove the need to add the port to the URL when trying to open the site. Ultimately I switched and deployed using Azure App Service as it was more straightforward to integrate with GitHub and allows a more clean looking URL: [freelanceflow.azurewebsites.net]()
 
 ## References
+
+The below are libraries used as part of this project, along with their licence type, and a link to documentation used to help me in configuring them.
+
+* Flask used as the framework for the project [BSD-3-Clause Licence]: [https://flask.palletsprojects.com/en/2.3.x/](https://flask.palletsprojects.com/en/2.3.x/)
+* Flask Bcrypt used for password hashing [BSD Licence]: [https://flask-bcrypt.readthedocs.io/en/1.0.1/](https://flask-bcrypt.readthedocs.io/en/1.0.1/)
+* Flask Login used for user sessions and authentication [MIT Licence]: [https://flask-login.readthedocs.io/en/latest/](https://flask-login.readthedocs.io/en/latest/)
+* ReportLab used to create the PDF report of the current users jobs [BSD Licence]: [https://docs.reportlab.com/reportlab/userguide/ch1_intro/](https://docs.reportlab.com/reportlab/userguide/ch1_intro/)
+* DataTables used to add sorting to tables [MIT Licence]: [https://datatables.net/](https://datatables.net/)
+* SQLite used for storing data [No Licence Required]: [https://www.sqlite.org/index.html](https://www.sqlite.org/index.html)
+* FullCalendar used to display the jobs in a calendar view [MIT Licence]: [https://fullcalendar.io/](https://fullcalendar.io/)
+* This source was helpful in determing which datatypes to use in my SQLite DB: [https://www.sqlite.org/draft/datatype3.html](https://www.sqlite.org/draft/datatype3.html)
+* This Digital Ocean Tutorial Series was also helpful in connecting my project to SQLite and adding user authentication: [https://www.digitalocean.com/community/tutorial-series/how-to-create-web-sites-with-flask](https://www.digitalocean.com/community/tutorial-series/how-to-create-web-sites-with-flask)
+
+

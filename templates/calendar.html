@@ -12,6 +12,7 @@
         </div>
     </div>
     <script>
+        // This script uses FullCalendar to display jobs on the calendar. The script creates the calendar and passes the events to the calendar. The events are passed in as a JSON object
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
