@@ -262,6 +262,7 @@ def admin():
 
 #This route is to generate a report
 #Function generates a PDF report with all jobs from the database where the current user is the creator
+# TO DO - Add more job data
 @app.route('/generate_report')
 @login_required
 def generate_report():
@@ -269,7 +270,7 @@ def generate_report():
     pdf.setTitle('FreelanceFlow Report')
     pdf.setFont('Helvetica', 12)
 
-    pdf.drawString(100, 800, 'Below is a list of all jobs:')
+    pdf.drawString(100, 800, 'Below is a list of all your jobs:')
 
     all_jobs = get_all_jobs()
 
@@ -277,7 +278,8 @@ def generate_report():
 
     for job in all_jobs:
         line_height = line_height - 20
-        pdf.drawString(100, line_height, job['title'])
+        job_string = job['title'] + ' - ' + job['description']
+        pdf.drawString(100, line_height, job_string)
 
     pdf.showPage()
     pdf.save()
