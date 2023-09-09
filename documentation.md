@@ -28,6 +28,9 @@ Secondly, SQLite is incredibly lightweight and is perfect for a small-scale appl
 
 The database entity relationship diagram was first planned and designed using Lucid. I then created the schema and database initialisation files in my project.
 
+![B8IT150 ERD](https://github.com/LukeM94/B8IT150-CA/assets/1420218/bd34e5e6-201d-488d-ae0f-8ee787892c3c)
+
+
 ## Architecture
 The front end uses HTML templates. I was able to create a base HTML template that included foundation page components including the nav bar and footer. The other pages such as login, then inherit the base template.
 
