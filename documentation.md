@@ -33,17 +33,37 @@ The front end uses HTML templates. I was able to create a base HTML template tha
 
 I also made extensive use of Bootstrap for the front end. Bootstrap is an extremely powerful system that allowed me to use components that are responsive and professional-looking.
 
-The back end uses Flask which is a Python web framework. Flask uses routes to create the URL endpoints and handles the requests for those endpoints.
+The back end uses Flask which is a Python web framework. Flask uses routes to create the URL endpoints and handles the requests for those endpoints. I chose to use Flask as I've worked with C# and ASP.NET in a previous module and wanted to learn some new skills.
 
-The application was deployed to Azure App Service. When configuring Azure App Service, I took advantage of  the code being stored in GitHub to add a GitHub Action that would deploy the latest version of my project was changes were pushed to the repo.
+The application was deployed to Azure App Service. When configuring Azure App Service, I took advantage of the code being stored in GitHub to add a GitHub Action that would deploy the latest version of my project was changes were pushed to the repo.
 
 ## Testing
 
+The below test cases were created to ensure the system meets the requirements mentioned above. 
+
 | Test ID | Test Description | Expected Result | Actual Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
-| 1 | User can register an account | User is registered and redirected to login page | User is registered and redirected to login page |  |
-| 2 | User can log in | User is logged in and redirected to profile | User is logged in and redirected to profile |  |
-| 3 | User can log out | User is logged out and redirected to the homepage | User is logged out and redirected to the homepage |  |
+| 1 | User can register an account | User is registered and redirected to login page | User is registered and redirected to login page | PASS |
+| 2 | User can log in | User is logged in and redirected to profile | User is logged in and redirected to profile | PASS |
+| 3 | User can log out | User is logged out and redirected to the homepage | User is logged out and redirected to the homepage | PASS |
+| 4 | Any user can view the homepage | Homepage is displayed | Homepage is displayed | PASS |
+| 5 | Any user can view the about page | About page is displayed | About page is displayed | PASS |
+| 6 | Any user can view the register page | Register page is displayed | Register page is displayed | PASS |
+| 7 | Any user can view the login page | Login page is displayed | Login page is displayed | PASS |
+| 8 | Only an authenticated user can view the jobs page | Jobs page displayed only when logged in | Jobs page is displayed | PASS |
+| 9 | Only an authenticated user can view the search page | Search page displayed only when logged in | Search page is displayed | PASS |
+| 10 | Only an authenticated user can view the create job page | Create job page displayed only when logged in | Create job page is displayed | PASS |
+| 11 | Only an authenticated user can view the calendar page | Calendar page displayed only when logged in | Calendar page is displayed | PASS |
+| 12 | Only an authenticated user can view the profile page | Profile page displayed only when logged in | Profile page is displayed | PASS |
+| 13 | Only an authenticated admin user can view the admin page | Admin page displayed only when logged in as an admin | Admin page is displayed | PASS |
+| 14 | A user can create a job via the create job page  | Job is created and the user is redirected to the jobs page | Redirected to the jobs page and the newly created job is visible in the table | PASS |
+| 15 | A job report can be generated with a list of the current users jobs | A PDF job report opens with every job created by the current user | PDF report is generated and contains a list of the expected jobs | PASS |
+| 16 | A user can modify a job via the jobs page | Modified job data is saved and appears on the job details page | Redirected to the jobs page and the modified data is saved | PASS |
+| 16 | A user can delete a job via the jobs page | Job is deleted from the system and no longer visible | Redirected to the jobs page and deleted job is not visible in the table | PASS |
+| 17 | A user can search for a job via the search page | Only jobs matching the search term are returned | Jobs matching the search term are displayed in the table | PASS |
+| 18 | A user can sort jobs by title, description, or status | Jobs are sorted in ascending or descending order | Jobs are sorted correctly based on the sort options clicked on the table headings | PASS |
+| 19 | A user can view their jobs on the calendar | Jobs appear on the calendar based on their deadline date | Jobs appear on the calendar on the day that they are due | PASS |
+
 
 ## Conclusion
 If I had more time to spend on the project there are a number of features I'd like to implement. One of these would be a payment function where customers of freelancers could pay their invoices. A payment system could be built from scratch however there are many considerations, especially around security. A more straightforward solution if I was to develop this would be to integrate a third-party service like Stripe or PayPal.
