@@ -2,16 +2,16 @@
 GitHub Repo for the Advanced Programming B8IT150 CA
 
 # Pre-Reqs to run locally
-Python3 must be installed
-pip3 must be installed
-pip3 install flask - Used for creating the web app
-pip3 install flask_login - Used for creating users sessions and managing login/registration
-pip3 install flask_bcrypt - Used for hashing passwords
-pip3 install reportlab - Used for generating PDFs
+* Python3 must be installed
+* pip3 must be installed
+* pip3 install flask - Used for creating the web app
+* pip3 install flask_login - Used for creating users sessions and managing login/registration
+* pip3 install flask_bcrypt - Used for hashing passwords
+* pip3 install reportlab - Used for generating PDFs
 
 # To run FreelanceFlow
 In a terminal or command prompt run: python3 pathToApplicationPy/application.py
-Open a browser and navigate to http://127.0.0.1:8080
+The terminal will give you a localhost link to open the project.
 
 # To run the live version of FreelanceFlow
 https://freelanceflow.azurewebsites.net/
@@ -27,4 +27,4 @@ https://freelanceflow.azurewebsites.net/
 8. Generate a PDF report of all jobs by clicking the Generate Job Report button on the jobs page
 9. You can search for a job via the search page based on its ID or title
 10. You can sort and filter jobs when they appear in the Jobs or Search page tables
-11. You can access admin mode by logging in with the email address: qa@freelanceflow.local and password: password. Then accessing the admin page via /admin URL, e.g. http://localhost:8000/admin
+11. You can access admin mode by logging in with the email address: qa@freelanceflow.local and password: password. You can then access the admin page via /admin URL, e.g. http://localhost:8000/admin

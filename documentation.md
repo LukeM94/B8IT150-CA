@@ -17,6 +17,8 @@ Data validation is handled on both the front end and the back end. On the front 
 
 The project was built using the following technologies: Flask, Python, SQLite, HTML, CSS, and JavaScript. Towards the end of the project, it was also deployed into Azure App Service.
 
+For information on how to run the project, see README.md - it also lists the required Python libraries needed to run the project.
+
 ## Requirements
 The requirements for the project were as follows:
 * The system can use any back end
@@ -48,7 +50,7 @@ I also made extensive use of Bootstrap for the front end. Bootstrap is an extrem
 
 The back end uses Flask which is a Python web framework. Flask uses routes to create the URL endpoints and handles the requests for those endpoints. I chose to use Flask as I've worked with C# and ASP.NET in a previous module and wanted to learn some new skills.
 
-The system was deployed to Azure App Service. When configuring Azure App Service, I took advantage of the code being stored in GitHub to add a GitHub Action that would deploy the latest version of my project was changes were pushed to the repo.
+The system was deployed to Azure App Service. When configuring Azure App Service, I took advantage of the code being stored in GitHub to add a GitHub Action that would deploy the latest version of my project when changes were pushed to the repo. The requirements.txt file lists the required Python libraries needed for the project to run.
 
 ## Testing
 In terms of testing, I used a mix of manual testing on the front end and unit testing on the back end. Unit tests are stored in the tests.py file, and below are the test cases I created and followed to test the front end.
@@ -76,11 +78,10 @@ In terms of testing, I used a mix of manual testing on the front end and unit te
 | 18 | A user can sort jobs by title, description, or status | Jobs are sorted in ascending or descending order | Jobs are sorted correctly based on the sort options clicked on the table headings | PASS |
 | 19 | A user can view their jobs on the calendar | Jobs appear on the calendar based on their deadline date | Jobs appear on the calendar on the day that they are due | PASS |
 
-
 ## Conclusion
 If I had more time to spend on the project there are a number of features I'd like to implement. One of these would be a payment function where customers of freelancers could pay their invoices. A payment system could be built from scratch however there are many considerations, especially around security. A more straightforward solution if I was to develop this would be to integrate a third-party service like Stripe or PayPal.
 
-I began using Overleaf to write the documentation in LATEX. I hadn't used LATEX before and found that while it's an incredibly powerful tool, it's also complex and I did struggle with things like table formatting. I decided to switch to Markdown for the documentation. The added bonus of using Markdown was the ability to work on my docs directly in VS Code where I was already writing code.
+I began using Overleaf to write the documentation in LATEX. I hadn't used LATEX before and found that while it's an incredibly powerful tool, it's also complex and I did struggle with things like table formatting. I later decided to switch to markdown for the documentation. The added bonus of using markdown was the ability to work on my docs directly in VS Code where I was already writing code.
 
 When deploying the application, I initially deployed to a Ubuntu VM running on Azure. I spent some time trying to remove the need to add the port to the URL when trying to open the site. Ultimately I switched and deployed using Azure App Service as it was more straightforward to integrate with GitHub and allows a more clean looking URL: [freelanceflow.azurewebsites.net]()
 
