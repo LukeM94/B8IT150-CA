@@ -1,8 +1,8 @@
-%PDF-1.3
+%PDF-1.4
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R
+/F1 2 0 R /F2 3 0 R
 >>
 endobj
 2 0 obj
@@ -12,7 +12,12 @@ endobj
 endobj
 3 0 obj
 <<
-/Contents 7 0 R /MediaBox [ 0 0 595.27 841.89 ] /Parent 6 0 R /Resources <<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/Contents 8 0 R /MediaBox [ 0 0 595.27 841.89 ] /Parent 7 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -20,49 +25,50 @@ endobj
   /Type /Page
 >>
 endobj
-4 0 obj
-<<
-/PageMode /UseNone /Pages 6 0 R /Type /Catalog
->>
-endobj
 5 0 obj
 <<
-/Author (anonymous) /CreationDate (D:20230910160959+00'00') /Creator (ReportLab PDF Library - www.reportlab.com) /Keywords () /ModDate (D:20230910160959+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
-  /Subject (unspecified) /Title (FreelanceFlow Report) /Trapped /False
+/PageMode /UseNone /Pages 7 0 R /Type /Catalog
 >>
 endobj
 6 0 obj
 <<
-/Count 1 /Kids [ 3 0 R ] /Type /Pages
+/Author (anonymous) /CreationDate (D:20230910180938+00'00') /Creator (ReportLab PDF Library - www.reportlab.com) /Keywords () /ModDate (D:20230910180938+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (unspecified) /Title (FreelanceFlow Job Report) /Trapped /False
 >>
 endobj
 7 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 211
+/Count 1 /Kids [ 4 0 R ] /Type /Pages
+>>
+endobj
+8 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 357
 >>
 stream
-Gas2A5mr90&;BTOMKc.pE^NC/V%a%96;(:e/Os&CVfp\/J"Kh2LPT@ChLkVf!O!Nkh+J'-&sJT2QpRY]rn*"]?n$GPHLXH1cU6'^/C>!-i!6WC6D:L`Vbfg5L22F3cZVL&bTVa+&@:;KL^Y_&=N#!NCiDA*&92tq<J+/813Fr]]%(=3-*8V6>fP=W_e#VQp,X?d[,$-Jd<bpM@mPb~>endstream
+Gas1Y_/b,]&A@ZMn(@>afq?.Q<c.*bG\Asig)FUTUBP*-a6DJ?":?oYP=]BXp:]:k947UXH(u(@$B,#fEJPGg[`8qP]Emg-:/)%(%)0G"`EeQuR=n]gK1)97:g[>HK?DAaLcr\oJC=$97_.:h,ufh_3p)^3GjK38!P`aHA+`IaM4R.gb^fMtFjH#,?[?q4*RfK:4D^/WrsZ._'7".!O)/Q(Ximq2(;if^osAhK>FhDJ1+X`ChWBVoNfVF4Ah#rsg$_W?[<NTZhhg'Y0rmGho\DI,=hS"I?Im6@oZ(s6JePUVVhu.h%Epktog%*5gAFbJniKsoNIobuhD*-C<8K.8$(KGV3O&J_gXqm3~>endstream
 endobj
 xref
-0 8
+0 9
 0000000000 65535 f 
 0000000073 00000 n 
-0000000104 00000 n 
-0000000211 00000 n 
-0000000410 00000 n 
-0000000478 00000 n 
-0000000786 00000 n 
-0000000845 00000 n 
+0000000114 00000 n 
+0000000221 00000 n 
+0000000333 00000 n 
+0000000532 00000 n 
+0000000600 00000 n 
+0000000912 00000 n 
+0000000971 00000 n 
 trailer
 <<
 /ID 
-[<8ef957f936d24116eb41d0d7df199f10><8ef957f936d24116eb41d0d7df199f10>]
+[<bcf0a28eb5ae984c27c5d26bb6cc20a3><bcf0a28eb5ae984c27c5d26bb6cc20a3>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 5 0 R
-/Root 4 0 R
-/Size 8
+/Info 6 0 R
+/Root 5 0 R
+/Size 9
 >>
 startxref
-1146
+1418
 %%EOF

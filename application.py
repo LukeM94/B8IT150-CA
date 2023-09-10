@@ -5,6 +5,7 @@ from flask_login import LoginManager, UserMixin, current_user, login_required, l
 from werkzeug.exceptions import abort
 from flask_bcrypt import Bcrypt
 from reportlab.pdfgen import canvas
+from reportlab.platypus import Table
 
 #Creating the Flask application. If the system was being deployed for real customers I'd make the secret key more secure
 app = Flask(__name__, static_url_path='/static')
@@ -275,19 +276,23 @@ def admin():
 @login_required
 def generate_report():
     pdf = canvas.Canvas('report.pdf', pagesize=(595.27, 841.89))
-    pdf.setTitle('FreelanceFlow Report')
+    pdf.setTitle('FreelanceFlow Job Report')
     pdf.setFont('Helvetica', 12)
 
-    pdf.drawString(100, 800, 'Below is a list of all your jobs:')
+    pdf.drawString(100, 800, 'FreelanceFlow Job Report')
+    pdf.drawString(100, 775, 'List of Your Jobs:')
+    pdf.setFont('Helvetica-Bold', 12)
 
     all_jobs = get_all_jobs()
 
-    line_height = 800
-
+    table = [['ID', 'Title', 'Status']]
     for job in all_jobs:
-        line_height = line_height - 20
-        job_string = job['title'] + ' - ' + job['description']
-        pdf.drawString(100, line_height, job_string)
+        table.append([job['jobid'], job['title'], job['status']])
+
+    jobtable = Table(table)
+    jobtable.setStyle([('BOX', (0, 0), (-1, -1), 0.25, (0, 0, 0)), ('INNERGRID', (0, 0), (-1, -1), 0.25, (0, 0, 0))])
+    jobtable.wrapOn(pdf, 0, 0)
+    jobtable.drawOn(pdf, 100, 725)
 
     pdf.showPage()
     pdf.save()
