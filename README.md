@@ -28,3 +28,6 @@ https://freelanceflow.azurewebsites.net/
 9. You can search for a job via the search page based on its ID or title
 10. You can sort and filter jobs when they appear in the Jobs or Search page tables
 11. You can access admin mode by logging in with the email address: qa@freelanceflow.local and password: password. You can then access the admin page via /admin URL, e.g. http://localhost:8000/admin
+
+# To run the unit tests
+In a terminal or command prompt run: python3 pathToTestsPy/tests.py
