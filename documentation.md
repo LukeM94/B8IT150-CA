@@ -7,7 +7,7 @@
 ## Introduction
 The aim of this project was to develop an Information System for a particular area of interest. In my case, I chose to build an IS that could be used by freelancers to log and track their incoming jobs.
 
-The system has two user account types: 'user' and 'admin'. The basic 'user' account type allows the user to access the system, and create/update/delete only their jobs. The 'admin' account type allows the admin to log in and view all the users in the system via an admin page.
+The system has two user account types: 'user' and 'admin'. The basic 'user' account type allows the user to access the system, and create/update/delete only their jobs. The 'admin' account type allows the admin to log in and view all the users and jobs in the system via an admin page.
 
 Tables in the system make use of a JavaScript library called DataTables which allows data to be filtered, sorted, and paginated. I've also built a search page to allow users to search their jobs by title or ID.
 
@@ -36,6 +36,8 @@ Different database solutions were considered at the planning stage of the projec
 Secondly, SQLite is incredibly lightweight and is perfect for a small-scale application such as this.
 
 The database entity relationship diagram was first planned and designed using Lucid. I then created the schema and database initialisation files in my project.
+
+Initial test data is created in the database with the init_db.py file. The script creates the tables and inserts some data into the Users and Jobs tables.
 
 ![B8IT150 ERD](https://github.com/LukeM94/B8IT150-CA/assets/1420218/bd34e5e6-201d-488d-ae0f-8ee787892c3c)
 

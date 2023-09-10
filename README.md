@@ -27,4 +27,4 @@ https://freelanceflow.azurewebsites.net/
 8. Generate a PDF report of all jobs by clicking the Generate Job Report button on the jobs page
 9. You can search for a job via the search page based on its ID or title
 10. You can sort and filter jobs when they appear in the Jobs or Search page tables
-11. You can access admin mode by logging in with the email address: luke@test.com and password: password. Then accessing the admin page via /admin URL, e.g. http://localhost:8000/admin
+11. You can access admin mode by logging in with the email address: qa@freelanceflow.local and password: password. Then accessing the admin page via /admin URL, e.g. http://localhost:8000/admin

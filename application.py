@@ -67,6 +67,13 @@ def get_all_jobs():
     conn.close()
     return all_jobs
 
+#Function to get all jobs from the database for the admin page
+def get_all_jobs_admin():
+    conn = database_connection()
+    all_jobs = conn.execute('SELECT * FROM Jobs').fetchall()
+    conn.close()
+    return all_jobs
+
 #Function to get all users from the database
 def get_all_users():
     conn = database_connection()
@@ -256,7 +263,8 @@ def deletejob(job_id):
 def admin():
     if current_user.accounttype == 'admin':
         all_users = get_all_users()
-        return render_template('admin.html', all_users=all_users)
+        all_jobs = get_all_jobs_admin()
+        return render_template('admin.html', all_users=all_users, all_jobs=all_jobs)
     else:
         return redirect(url_for('index'))
 
