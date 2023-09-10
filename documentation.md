@@ -1,7 +1,8 @@
 # Project Documentation
-#### Luke Morton ####
-#### 10621189 ####
-#### September 2023 ####
+#### Name: Luke Morton ####
+#### Student ID: 10621189 ####
+#### Submission Date: 10th September 2023 ####
+#### GitHub Repo Link: https://github.com/LukeM94/B8IT150-CA ####
 
 ## Introduction
 The aim of this project was to develop an Information System for a particular area of interest. In my case, I chose to build an IS that could be used by freelancers to log and track their incoming jobs.

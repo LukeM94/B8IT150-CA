@@ -256,7 +256,7 @@ def deletejob(job_id):
 def admin():
     if current_user.accounttype == 'admin':
         all_users = get_all_users()
-        return render_template('admin.html', all_users)
+        return render_template('admin.html', all_users=all_users)
     else:
         return redirect(url_for('index'))
 
