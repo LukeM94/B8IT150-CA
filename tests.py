@@ -16,8 +16,9 @@ def database_connection():
 def tests():unittest.main(argv=['ignored'],exit=False)
 
 class TestFreelanceFlow(unittest.TestCase):
-    def test_user_registration(self):
-        username = 'testuser'
+    #This test will create a user with the data below and verify it was inserted into the database as expected
+    def a_test_user_registration(self):
+        username = 'unittestuser'
         password = 'password'
         emailaddress = 'testuser@freelanceflow.com'
         firstname = 'Test'
@@ -35,17 +36,23 @@ class TestFreelanceFlow(unittest.TestCase):
         self.assertEqual(user_data['emailaddress'], emailaddress)
         self.assertEqual(user_data['firstname'], firstname)
         self.assertEqual(user_data['lastname'], lastname)
+        conn = database_connection()
+        conn.execute('DELETE FROM Users WHERE username = ?', ('unittestuser',))
+        conn.commit()
+        conn.close()
     
-    def test_job_creation(self):
+    #This test will create a job with the data below and verify it was inserted into the database as expected
+    def b_test_job_creation(self):
         title = 'Test Job UnitTest'
         description = 'Test Description'
         datecreated = '01/01/23'
         deadline = '01/12/23'
         status = 'Open'
         quotation = 150
+        createdby = 8
         conn = database_connection()
-        conn.execute('INSERT INTO Jobs (title, description, datecreated, deadline, status, quotation) VALUES (?, ?, ?, ?, ?, ?)',
-                        (title, description, datecreated, deadline, status, quotation))
+        conn.execute('INSERT INTO Jobs (title, description, datecreated, deadline, status, quotation, createdby) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                        (title, description, datecreated, deadline, status, quotation, createdby))
         conn.commit()
         conn.close()
         conn = database_connection()
@@ -58,8 +65,9 @@ class TestFreelanceFlow(unittest.TestCase):
         self.assertEqual(job_data['status'], status)
         self.assertEqual(job_data['quotation'], quotation)
 
-    def test_modifying_job(self):
-        title = 'Updated Title'
+    #This test will update the previously created job with a new title and verify it was inserted into the database as expected
+    def c_test_modifying_job(self):
+        title = 'Updated Title UnitTest'
         conn = database_connection()
         jobid = conn.execute('SELECT jobid FROM Jobs WHERE title = ?', ('Test Job UnitTest',)).fetchone()['jobid']
         conn.execute('UPDATE Jobs SET title = ? WHERE jobid = ?', (title, jobid))
@@ -70,16 +78,17 @@ class TestFreelanceFlow(unittest.TestCase):
         conn.close()
         self.assertEqual(job_data['title'], title)
 
-    def test_deleting_job(self):
+    #This test will delete the previously updated job and verify it's no longer available in the database
+    def d_test_deleting_job(self):
         conn = database_connection()
-        jobid = conn.execute('SELECT jobid FROM Jobs WHERE title = ?', ('1111',)).fetchone()['jobid']
-        conn.execute('DELETE FROM Jobs WHERE jobid = ?', (jobid,))
+        job_to_delete = conn.execute('SELECT jobid FROM Jobs WHERE title = ?', ('Updated Title UnitTest',)).fetchone()['jobid']
+        conn.execute('DELETE FROM Jobs WHERE jobid = ?', (job_to_delete,))
         conn.commit()
         conn.close()
         conn = database_connection()
-        job_data = conn.execute('SELECT * FROM Jobs WHERE jobid = ?', (jobid,)).fetchone()
+        job_data = conn.execute('SELECT * FROM Jobs WHERE jobid = ?', (job_to_delete,)).fetchone()
         conn.close()
-        self.assertIsNone(job_data)
+        self.assertEqual(job_data, None)
 
 #Running the unit tests
 tests()

@@ -7,6 +7,14 @@
 ## Introduction
 The aim of this project was to develop an Information System for a particular area of interest. In my case, I chose to build an IS that could be used by freelancers to log and track their incoming jobs.
 
+The system has two user account types: 'user' and 'admin'. The basic 'user' account type allows the user to access the system, and create/update/delete only their jobs. The 'admin' account type allows the admin to log in and view all the users in the system via an admin page.
+
+Tables in the system make use of a JavaScript library called DataTables which allows data to be filtered, sorted, and paginated. I've also built a search page to allow users to search their jobs by title or ID.
+
+A job report can be generated as a PDF which lists all the jobs created by the current user. The report is generated using a Python library called ReportLab.
+
+Data validation is handled on both the front end and the back end. On the front end I've used HTML validation on the forms to ensure the correct type of data is entred. On the back end I've used Python to validate the data before it's saved to the database. I've also made use of flash messages to display errors to the user if data is missing.
+
 The project was built using the following technologies: Flask, Python, SQLite, HTML, CSS, and JavaScript. Towards the end of the project, it was also deployed into Azure App Service.
 
 ## Requirements
@@ -43,7 +51,7 @@ The system was deployed to Azure App Service. When configuring Azure App Service
 
 ## Testing
 
-The below test cases were created to ensure the system meets the requirements mentioned above. 
+In terms of testing, I used a mix of manual testing on the front end and unit testing on the back end. Unit tests are stored in the tests.py file, and below are the test cases I created and followed to test the front end.
 
 | Test ID | Test Description | Expected Result | Actual Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
@@ -75,6 +83,8 @@ If I had more time to spend on the project there are a number of features I'd li
 I began using Overleaf to write the documentation in LATEX. I hadn't used LATEX before and found that while it's an incredibly powerful tool, it's also complex and I did struggle with things like table formatting. I decided to switch to Markdown for the documentation. The added bonus of using Markdown was the ability to work on my docs directly in VS Code where I was already writing code.
 
 When deploying the application, I initially deployed to a Ubuntu VM running on Azure. I spent some time trying to remove the need to add the port to the URL when trying to open the site. Ultimately I switched and deployed using Azure App Service as it was more straightforward to integrate with GitHub and allows a more clean looking URL: [freelanceflow.azurewebsites.net]()
+
+In my unit tests I create, update, and then delete a job from the system. I was finding that tests were running in the wrong order and discovered that unittest runs tests in alphabetical order. I was able to resolve this by prefixing the name of each test with a letter.
 
 ## References
 
