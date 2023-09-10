@@ -3,28 +3,35 @@
 {% block title %} FreelanceFlow - The job tracking system for Freelancers! {% endblock %}
 {% block jumbotron_title %} FreelanceFlow. Designed for productivity. {% endblock %}
 {% block content %}
-    <div class="heroImage">
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+      <div class="col-md-8 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 font-weight-normal">The job tracking system designed for productivity</h1>
+        <p class="lead font-weight-normal">FreelanceFlow is the job-tracking tool designed with freelancers like you in mind. Lightweight and straightforward, you'll be more productivity straight away.</p>
+        <a class="btn btn-outline-secondary" href="{{ url_for('createjob')}}">Start creating</a>
+      </div>
     </div>
-    <div class="container text-center mt-5">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="testimonial">
-              <img src="../static/images/customerOne.jpeg" class="rounded-circle" alt="Testimonial 1">
-              <p>Increased my productivity 10x!</p>
-            </div>
+    <div class="container">
+      <div class="row">
+        <div class="testimonial col-md-4 text-center overflow-hidden">
+          <div class="my-3 py-3">
+            <p class="lead">Increased my productivity 10x giving me time to focus on my clients</p>
           </div>
-          <div class="col-lg-4">
-            <div class="testimonial">
-              <img src="../static/images/customerTwo.jpeg" class="rounded-circle" alt="Testimonial 2">
-              <p>An incredibly reliable tool - highly recommended for any freelancers...</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="testimonial">
-              <img src="../static/images/customerThree.jpeg" class="rounded-circle" alt="Testimonial 3">
-              <p>Using FreelanceFlow has made managing multiple jobs so much easier...</p>
-            </div>
-          </div>
+          <img class="testimonial-img rounded-circle" src="../static/images/customerOne.jpeg" alt="Testimonial 1">
         </div>
-      </div>    
+        <div class="testimonial col-md-4 text-center overflow-hidden">
+          <div class="my-3 py-3">
+            <p class="lead">An incredibly reliable tool - highly recommended for any freelancers...</p>
+          </div>
+          <img class="testimonial-img rounded-circle" src="../static/images/customerTwo.jpeg" alt="Testimonial 2">
+        </div>
+        <div class="testimonial col-md-4 text-center overflow-hidden">
+          <div class="my-3 py-3">
+            <p class="lead">Using FreelanceFlow has made managing multiple jobs so much easier...</p>
+          </div>
+          <img class="testimonial-img rounded-circle" src="../static/images/customerThree.jpeg" alt="Testimonial 3">
+        </div>
+      </div>
+    </div>
+    
+    
 {% endblock %}

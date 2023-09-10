@@ -86,7 +86,7 @@ def get_all_users():
 #This route is for the homepage
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', isIndex = True)
 
 #This route is for the about page
 @app.route('/about')
