@@ -37,6 +37,7 @@ h1 {
 
 .aboutImage {
   width: 100%;
+  border-radius: 10px;
 }
 
 .testimonial {
