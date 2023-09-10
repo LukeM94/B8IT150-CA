@@ -41,7 +41,6 @@ Initial test data is created in the database with the init_db.py file. The scrip
 
 ![B8IT150 ERD](https://github.com/LukeM94/B8IT150-CA/assets/1420218/bd34e5e6-201d-488d-ae0f-8ee787892c3c)
 
-
 ## Architecture
 The front end uses HTML templates. I was able to create a base HTML template that included foundation page components including the nav bar and footer. The other pages such as login, then inherit the base template.
 
@@ -52,7 +51,6 @@ The back end uses Flask which is a Python web framework. Flask uses routes to cr
 The system was deployed to Azure App Service. When configuring Azure App Service, I took advantage of the code being stored in GitHub to add a GitHub Action that would deploy the latest version of my project was changes were pushed to the repo.
 
 ## Testing
-
 In terms of testing, I used a mix of manual testing on the front end and unit testing on the back end. Unit tests are stored in the tests.py file, and below are the test cases I created and followed to test the front end.
 
 | Test ID | Test Description | Expected Result | Actual Result | Pass/Fail |
@@ -89,7 +87,6 @@ When deploying the application, I initially deployed to a Ubuntu VM running on A
 In my unit tests I create, update, and then delete a job from the system. I was finding that tests were running in the wrong order and discovered that unittest runs tests in alphabetical order. I was able to resolve this by prefixing the name of each test with a letter.
 
 ## References
-
 The below are libraries used as part of this project, along with their licence type, and a link to documentation used to help me in configuring them.
 
 * Flask used as the framework for the project [BSD-3-Clause Licence]: [https://flask.palletsprojects.com/en/2.3.x/](https://flask.palletsprojects.com/en/2.3.x/)
@@ -101,5 +98,3 @@ The below are libraries used as part of this project, along with their licence t
 * FullCalendar used to display the jobs in a calendar view [MIT Licence]: [https://fullcalendar.io/](https://fullcalendar.io/)
 * This source was helpful in determing which datatypes to use in my SQLite DB: [https://www.sqlite.org/draft/datatype3.html](https://www.sqlite.org/draft/datatype3.html)
 * This Digital Ocean Tutorial Series was also helpful in connecting my project to SQLite and adding user authentication: [https://www.digitalocean.com/community/tutorial-series/how-to-create-web-sites-with-flask](https://www.digitalocean.com/community/tutorial-series/how-to-create-web-sites-with-flask)
-
-
