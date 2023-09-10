@@ -98,3 +98,4 @@ The below are libraries used as part of this project, along with their licence t
 * FullCalendar used to display the jobs in a calendar view [MIT Licence]: [https://fullcalendar.io/](https://fullcalendar.io/)
 * This source was helpful in determing which datatypes to use in my SQLite DB: [https://www.sqlite.org/draft/datatype3.html](https://www.sqlite.org/draft/datatype3.html)
 * This Digital Ocean Tutorial Series was also helpful in connecting my project to SQLite and adding user authentication: [https://www.digitalocean.com/community/tutorial-series/how-to-create-web-sites-with-flask](https://www.digitalocean.com/community/tutorial-series/how-to-create-web-sites-with-flask)
+* Photos taken from pexels.com [Royalty Free and attribution not required]: [https://www.pexels.com/](https://www.pexels.com/)
